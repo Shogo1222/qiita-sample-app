@@ -22,6 +22,9 @@ jobs:
           command:           docker-compose up -d
       - run:                 sleep 30
       - run:
+          name:              docker-compose exec db mysql -u root -p -e"$(cat back/db/grant_user.sql)"
+          command:           docker-compose exec db mysql -u root -p -e"$(cat back/db/grant_user.sql)"
+      - run:
           name:              docker-compose run back rails db:create RAILS_ENV=test
           command:           docker-compose run back rails db:create RAILS_ENV=test
       - run:
